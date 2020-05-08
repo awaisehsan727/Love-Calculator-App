@@ -5,18 +5,28 @@ const Displaylove = (prop)=>
 {
     if(prop.data=="loading")
     {
-     return<Text style={styles.text}>Just wait !...Something is Doing for you</Text>
+     return(
+     
+        <View style={styles.container}>
+        <Text style={styles.text}>Enter Names and check your love with Other and Enjoy</Text>
+        <Text style={styles.text1}>Awaisehsane727@gmail.com</Text>
+       </View>
+        )
     }
     else
-    // if(prop.data.message)
-    // {
-    //     console.log()
-    //     return <Text style={styles.text}>Sorry..! Something Went Wrog.. Try Again..!</Text>   
-    // }
+    if(prop.data.message)
+    { 
+        return (
+        <View style={styles.container}>
+        <Text style={styles.text}>Sorry..! Something Went Wrog.. Try Again..!</Text>
+        <Text style={styles.text1}>Awaisehsane727@gmail.com</Text>
+       </View>
+        )     
+    }
     {
     return(
         <View style={styles.container}>
-         <Text style={styles.text}>{prop.data.percentage}</Text>
+         <Text style={styles.text}>{prop.data.percentage}%</Text>
          <Text style={styles.text}>{prop.data.result}</Text>
         </View>
 
@@ -37,7 +47,17 @@ const styles = StyleSheet.create({
     textAlign:'center',
     marginLeft:10,
     marginRight:10,
-    marginTop:20
+    marginTop:20,
+    color:'#8565c4'
+    },
+    text1:
+    {
+    fontSize:12,
+    textAlign:'center',
+    marginLeft:150,
+    marginRight:5,
+    marginTop:120,
+    color:'#8565c4'
     }
     
   });

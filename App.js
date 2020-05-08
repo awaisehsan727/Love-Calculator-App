@@ -1,32 +1,53 @@
 import React from 'react';
-import { StyleSheet, View, StatusBar } from 'react-native';
+import { StyleSheet, View, StatusBar,TouchableWithoutFeedback,Alert,Keyboard  } from 'react-native';
 import { TextInput, Appbar, Button } from 'react-native-paper';
 import Displaylove from './component/Displaylove'
 
 class App extends React.Component {
-  state = {
-    fname: '',
-    sname: '',
-    result: "loading"
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      fname: '',
+      sname: '',
+      result: "loading"
+    }
   }
-  submit() {
-    fetch('https://love-calculator.p.rapidapi.com/getPercentage?fname=John&sname=Alice', {
-      "method": "GET",
-      "headers": {
-        "x-rapidapi-host": "love-calculator.p.rapidapi.com",
-        "x-rapidapi-key": "5e0316cbb6msh676e614b082cf32p1bda87jsn859bfbcd4a24"
-      }
-    })
-      .then(data => data.json())
-      .then(data2 => {
-        console.log(data2)
-        this.setState({
-          result: data2
-        })
+  submit() { 
+    if(this.state.fname=='' || this.state.sname=='')
+    {
+      Alert.alert(
+        "Warning",
+        'Some thing went Wrong.... please Enter all Fields'
+     )
+    }
+    else
+    {
+      fetch(`https://love-calculator.p.rapidapi.com/getPercentage?fname=${this.state.fname}&sname=${this.state.sname}`,{
+        "method": "GET",
+        "headers": {
+          "x-rapidapi-host": "love-calculator.p.rapidapi.com",
+          "x-rapidapi-key": "b15632a744msh02c17d5f151c924p15daaajsne70af54766f6"
+        }
       })
+        .then(data => data.json())
+        .then(data2 => {
+          console.log(data2)
+          this.setState({
+            result: data2
+          })
+        })
+        this.setState(
+          {
+            fname:'',
+            sname:''
+          }
+        )  
+    }
   }
   render() {
     return (
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View style={styles.container}>
         <StatusBar backgroundColor='#8565c4' barStyle="light-content" />
         <Appbar.Header>
@@ -41,22 +62,28 @@ class App extends React.Component {
          <Appbar.Action icon="dots-vertical" onPress={this._handleMore} /> */}
         </Appbar.Header>
         <TextInput
-          label='first Name'
+          label='Enter Name (Male)'
           value={this.state.fname}
           style={{ margin: 20 }}
           onChangeText={text => this.setState({ fname: text })}
         />
         <TextInput
-          label='Last name'
+          label='Enter Name (Female)'
           value={this.state.sname}
           style={{ margin: 20 }}
           onChangeText={text => this.setState({ sname: text })}
         />
-        <Button icon="tag-faces" mode="contained" style={{ height: 40, marginTop: 20, marginLeft: 30, marginRight: 30 }} onPress={this.submit.bind(this)}>
+        <Button icon="tag-faces" mode="contained" style={{ height: 40, marginTop: 20, marginLeft: 30, marginRight: 30 }} onPress={() => {
+          this.submit();
+        }}
+          onPressIn={() => {
+            Keyboard.dismiss
+          }}>
           Calculate
        </Button>
         <Displaylove style={{ marginTop: 20 }} data={this.state.result} />
       </View>
+      </TouchableWithoutFeedback>
     );
   }
 }
