@@ -9,7 +9,6 @@ const Displaylove = (prop)=>
      
         <View style={styles.container}>
         <Text style={styles.text}>Enter Names and check your love with Other and Enjoy</Text>
-        <Text style={styles.text1}>Awaisehsane727@gmail.com</Text>
        </View>
         )
     }
@@ -19,7 +18,6 @@ const Displaylove = (prop)=>
         return (
         <View style={styles.container}>
         <Text style={styles.text}>Sorry..! Something Went Wrog.. Try Again..!</Text>
-        <Text style={styles.text1}>Awaisehsane727@gmail.com</Text>
        </View>
         )     
     }
@@ -27,7 +25,7 @@ const Displaylove = (prop)=>
     return(
         <View style={styles.container}>
          <Text style={styles.text}>{prop.data.percentage}%</Text>
-         <Text style={styles.text}>{prop.data.result}</Text>
+         <Text style={styles.textr}>{prop.data.result}</Text>
         </View>
 
     )
@@ -38,26 +36,28 @@ export default Displaylove
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#fff',
-      justifyContent:'center'
+      backgroundColor: '#e8f4f8',
+      justifyContent:'center',
+      marginTop:30
     },
     text:
     {
-    fontSize:30,
+    fontSize:50,
     textAlign:'center',
-    marginLeft:10,
-    marginRight:10,
-    marginTop:20,
-    color:'#8565c4'
+    marginLeft:15,
+    marginRight:15,
+    marginTop:50,
+    color:'#8565c4',
+    fontWeight:'bold'
     },
-    text1:
+    textr:
     {
-    fontSize:12,
+    fontSize:25,
     textAlign:'center',
-    marginLeft:150,
-    marginRight:5,
-    marginTop:120,
-    color:'#8565c4'
+    marginLeft:15,
+    marginRight:15,
+    color:'#8565c4',
+    fontWeight:'bold'
     }
     
   });
